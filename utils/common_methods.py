@@ -55,7 +55,7 @@ def openWebsite(driver,websiteUrl):
     driver.get(websiteUrl)
     driver.maximize_window()
 # Helper to select dropdown options
-def selectDropdownOption(driver, dropdownLocator, value,optionLocation):
+def selectDropdownOption(driver, dropdownLocator, value, optionLocation):
     try:
         dropdown = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.XPATH, dropdownLocator))

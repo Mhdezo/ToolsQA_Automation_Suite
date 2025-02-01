@@ -21,6 +21,7 @@ def fillForm(driver,config):
         # Scroll to the beginning of the form
         formBeginElement = driver.find_element(By.XPATH, "//h5[normalize-space()='Student Registration Form']")
         scrollIntoView(driver, formBeginElement)
+        
         # Read data from the Excel sheet form_data.xlsx
         dataFrame = readExcelData('Sheet1',config)
         # Find and Fill First Name field
