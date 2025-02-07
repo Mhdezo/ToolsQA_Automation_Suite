@@ -45,9 +45,9 @@ def initialize_driver(browser,config):
         logging.error(f"Error initializing driver: {e}")
         sys.exit(1)
 # Scroll to the element
-def scrollIntoView(driver,element):
+def scrollIntoView(driver, *element):
     try:
-        driver.execute_script("arguments[0].scrollIntoView();", element)
+        driver.execute_script("arguments[0].scrollIntoView();", driver.find_element(*element))
     except Exception as e:
         logging.warning(f"Could not scroll to element: {e}")
 # Open the website and maximize the window
@@ -58,9 +58,9 @@ def openWebsite(driver,websiteUrl):
 def selectDropdownOption(driver, dropdownLocator, value, optionLocation):
     try:
         dropdown = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, dropdownLocator))
+            EC.presence_of_element_located(dropdownLocator)
         )
-        options = dropdown.find_elements(By.XPATH, optionLocation)
+        options = dropdown.find_elements(optionLocation)
         for option in options:
             if option.text.lower() == value.lower():
                 option.click()

@@ -4,20 +4,18 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import sys
 import logging
-from ToolsQA_Automation_Suite.utils.common_methods import (scrollIntoView,readExcelData,
-                                                           selectDropdownOption, read_config, configure_logging,
-                                                           initialize_driver, quitBrowser, openWebsite)
+from ToolsQA_Automation_Suite.utils.common_methods import scrollIntoView, selectDropdownOption
 from ToolsQA_Automation_Suite.pages.base_page import BasePage
 
 class PracticeFormPage(BasePage):
     # Locators
     FORMS_CARD = (By.XPATH, "//h5[normalize-space()='Forms']")
-    PRACTICE_FORM = (By.ID, "item-0")
+    PRACTICE_FORM = (By.XPATH, "//div[@class='element-list collapse show']//li[@id='item-0']")
     BEGINNING_OF_FORM = (By.XPATH, "//h5[normalize-space()='Student Registration Form']")
     FIRST_NAME = (By.ID, "firstName")
     LAST_NAME = (By.ID, "lastName")
     USER_EMAIL = (By.ID, "userEmail")
-    GENDER_RADIO = (By.XPATH, "//label[contains(@for, 'gender-radio')]")
+    # GENDER_RADIO = (By.XPATH, "//label[contains(@for, 'gender-radio')]")
     USER_NUMBER = (By.ID, "userNumber")
     DATE_OF_BIRTH = (By.ID, "dateOfBirthInput")
     CURRENT_MONTH_YEAR = (By.XPATH,"//div[@class='react-datepicker__current-month react-datepicker__current-month--hasYearDropdown react-datepicker__current-month--hasMonthDropdown']")
@@ -27,8 +25,8 @@ class PracticeFormPage(BasePage):
     SUBJECTS_INPUT = (By.ID, "subjectsInput")
     DROPDOWN = (By.XPATH, "//div[contains(@class,'css-26l3qy')]")
     DROPDOWN_OPTIONS = (By.XPATH, "//div[contains(@id,'-option')]")
-    HOBBIES_CHECKBOX = (By.XPATH, "//input[contains(@id, 'hobbies-checkbox')]")
-    HOBBIES_LABELS = (By.XPATH, "//input[contains(@id, 'hobbies-checkbox')]//following-sibling::label")
+    # HOBBIES_CHECKBOX = (By.XPATH, "//input[contains(@id, 'hobbies-checkbox')]")
+    # HOBBIES_LABELS = (By.XPATH, "//input[contains(@id, 'hobbies-checkbox')]//following-sibling::label")
     UPLOAD_PICTURE = (By.ID, "uploadPicture")
     CURRENT_ADDRESS = (By.ID, "currentAddress")
     STATE_INPUT = (By.ID, "state")
@@ -95,12 +93,21 @@ class PracticeFormPage(BasePage):
 
     def fill_subjects(self, subjects):
         """Fills the Subjects field."""
+        subjects = str(subjects[0]).split(',')
+        #subjects = subjects.split(',')
         for subject in subjects:
             self.type(self.SUBJECTS_INPUT, subject)
-            # Add logic to select from dropdown if needed
+            # select from dropdown
+            if self.is_element_visible(self.DROPDOWN):
+                selectDropdownOption(self.driver,*self.DROPDOWN,subject,*self.DROPDOWN_OPTIONS)
+            else:
+                logging.warning(f"Subjects Dropdown not found!")
 
     def select_hobbies(self, hobbies):
         """Selects hobbies."""
+        hobbies = str(hobbies[0]).split(',')
+        # Use list comprehensions to lower the list
+        hobbies = [h.lower() for h in hobbies]
         for hobby in hobbies:
             hobby_locator = (By.XPATH, f"//label[text()='{hobby}']")
             self.click(hobby_locator)
@@ -115,15 +122,24 @@ class PracticeFormPage(BasePage):
 
     def select_state(self, state):
         """Selects a state."""
-        self.click(self.STATE_DROPDOWN)
-        state_locator = (By.XPATH, f"//div[text()='{state}']")
-        self.click(state_locator)
+        scrollIntoView(self.driver, *self.STATE_INPUT)
+        self.click(*self.STATE_INPUT)
+        state = str(state[0])
+        # select from dropdown
+        if self.is_element_visible(self.DROPDOWN):
+            selectDropdownOption(self.driver, *self.DROPDOWN, state, *self.DROPDOWN_OPTIONS)
+        else:
+            logging.warning(f"Subjects Dropdown not found!")
 
     def select_city(self, city):
         """Selects a city."""
-        self.click(self.CITY_DROPDOWN)
-        city_locator = (By.XPATH, f"//div[text()='{city}']")
-        self.click(city_locator)
+        self.click(*self.STATE_INPUT)
+        city = str(city[0])
+        # select from dropdown
+        if self.is_element_visible(self.DROPDOWN):
+            selectDropdownOption(self.driver, *self.DROPDOWN, city, *self.DROPDOWN_OPTIONS)
+        else:
+            logging.warning(f"Subjects Dropdown not found!")
 
     def submit_form(self):
         """Submits the form."""
@@ -131,9 +147,9 @@ class PracticeFormPage(BasePage):
 
     def navigate_to_practice_form(self):
         """Navigates to the Practice Form page."""
-        forms_card = self.driver.find_element(*self.FORMS_CARD)
-        scrollIntoView(self.driver, forms_card)
-        forms_card.click()
+        # forms_card = self.driver.find_element(*self.FORMS_CARD)
+        scrollIntoView(self.driver, *self.FORMS_CARD)
+        self.click(*self.FORMS_CARD)
         self.driver.find_element(*self.PRACTICE_FORM).click()
 
     def scroll_to_form_beginning(self):

@@ -1,9 +1,10 @@
 # tests/test_practice_form.py
 import pytest
 from ToolsQA_Automation_Suite.pages.practice_form_v2 import PracticeFormPage
-from ToolsQA_Automation_Suite.utils.common_methods import initialize_driver, read_config, configure_logging, readExcelData
+from ToolsQA_Automation_Suite.utils.common_methods import initialize_driver, read_config, configure_logging, readExcelData, By
 
 def test_practice_form():
+    global driver
     try:
         # Read config and initialize driver
         config = read_config()
@@ -18,7 +19,7 @@ def test_practice_form():
 
         # Navigate to the Practice Form
         practice_form_page.navigate_to_practice_form()
-        practice_form_page.scroll_to_form_beginning()
+        # practice_form_page.scroll_to_form_beginning()
 
         # Read data from Excel
         data = readExcelData("Sheet1", config)
@@ -30,8 +31,7 @@ def test_practice_form():
         practice_form_page.select_gender(data["Gender"][0])
         practice_form_page.fill_mobile_number(data["userNumber"])
         practice_form_page.fill_date_of_birth(data["dateOfBirthInput"])
-        # we are here 
-        practice_form_page.fill_subjects(data["subjectsInput"].split(","))
+        practice_form_page.fill_subjects(data["subjectsInput"])
         practice_form_page.select_hobbies(data["hobbies"].split(","))
         practice_form_page.upload_picture(config.get("PATHS", "uploadfile") + data["uploadPicture"])
         practice_form_page.fill_current_address(data["currentAddress"])
