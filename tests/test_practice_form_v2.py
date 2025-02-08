@@ -1,7 +1,9 @@
 # tests/test_practice_form.py
+import logging
+
 import pytest
-from ToolsQA_Automation_Suite.pages.practice_form_v2 import PracticeFormPage
-from ToolsQA_Automation_Suite.utils.common_methods import initialize_driver, read_config, configure_logging, readExcelData, By
+from pages.practice_form_v2 import PracticeFormPage
+from utils.common_methods import initialize_driver, read_config, configure_logging, readExcelData, By
 
 def test_practice_form():
     global driver
@@ -28,12 +30,12 @@ def test_practice_form():
         practice_form_page.fill_first_name(data["firstName"])
         practice_form_page.fill_last_name(data["lastName"])
         practice_form_page.fill_email(data["userEmail"])
-        practice_form_page.select_gender(data["Gender"][0])
+        practice_form_page.select_gender(data["Gender"])
         practice_form_page.fill_mobile_number(data["userNumber"])
         practice_form_page.fill_date_of_birth(data["dateOfBirthInput"])
         practice_form_page.fill_subjects(data["subjectsInput"])
-        practice_form_page.select_hobbies(data["hobbies"].split(","))
-        practice_form_page.upload_picture(config.get("PATHS", "uploadfile") + data["uploadPicture"])
+        practice_form_page.select_hobbies(data["hobbies"])
+        practice_form_page.upload_picture(str(config.get("PATHS", "uploadfile")) + str(data["uploadPicture"][0]))
         practice_form_page.fill_current_address(data["currentAddress"])
         practice_form_page.select_state(data["state"])
         practice_form_page.select_city(data["city"])

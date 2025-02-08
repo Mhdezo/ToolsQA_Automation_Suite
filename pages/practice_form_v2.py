@@ -4,8 +4,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import sys
 import logging
-from ToolsQA_Automation_Suite.utils.common_methods import scrollIntoView, selectDropdownOption
-from ToolsQA_Automation_Suite.pages.base_page import BasePage
+from utils.common_methods import scrollIntoView, selectDropdownOption
+from pages.base_page import BasePage
 
 class PracticeFormPage(BasePage):
     # Locators
@@ -50,7 +50,7 @@ class PracticeFormPage(BasePage):
 
     def select_gender(self, gender):
         """Selects a gender."""
-        gender_locator = (By.XPATH, f"//label[text()='{gender}']")
+        gender_locator = (By.XPATH, f'//label[text()="{gender[0]}"]')
         self.click(gender_locator)
 
     def fill_mobile_number(self, number):
@@ -63,9 +63,9 @@ class PracticeFormPage(BasePage):
         :param dob: The date of birth in the format "DD MMMM YYYY" (e.g., "15 January 1990").
         """
         month_year = dob[0][dob[0].find(' ')+1:] # Get only month and year
-        data_of_birth_locator = self.driver.find_element(*self.DATE_OF_BIRTH)
-        scrollIntoView(self.driver,data_of_birth_locator)
-        data_of_birth_locator.click()
+        date_of_birth_locator = self.driver.find_element(*self.DATE_OF_BIRTH)
+        scrollIntoView(self.driver,*self.DATE_OF_BIRTH)
+        date_of_birth_locator.click()
         current_month_and_year = self.driver.find_element(*self.CURRENT_MONTH_YEAR).text
         arrow = ''
         if month_year[-4:] > current_month_and_year[-4:]:
@@ -76,7 +76,7 @@ class PracticeFormPage(BasePage):
         while True:
             current_month_and_year = self.driver.find_element(*self.CURRENT_MONTH_YEAR).text
             if current_month_and_year == month_year:
-                days = self.driver.find_element(*self.DAYS)
+                days = self.driver.find_elements(*self.DAYS)
                 temp_day_month = str(dob[0])
                 temp_day_month = temp_day_month.split(' ')
                 temp_day = temp_day_month[0].lstrip('0') # Remove leading zero from the da
@@ -99,7 +99,7 @@ class PracticeFormPage(BasePage):
             self.type(self.SUBJECTS_INPUT, subject)
             # select from dropdown
             if self.is_element_visible(self.DROPDOWN):
-                selectDropdownOption(self.driver,*self.DROPDOWN,subject,*self.DROPDOWN_OPTIONS)
+                selectDropdownOption(self.driver,self.DROPDOWN,subject,self.DROPDOWN_OPTIONS)
             else:
                 logging.warning(f"Subjects Dropdown not found!")
 
@@ -109,7 +109,7 @@ class PracticeFormPage(BasePage):
         # Use list comprehensions to lower the list
         hobbies = [h.lower() for h in hobbies]
         for hobby in hobbies:
-            hobby_locator = (By.XPATH, f"//label[text()='{hobby}']")
+            hobby_locator = (By.XPATH, f'//label[text()="{hobby.capitalize()}"]')
             self.click(hobby_locator)
 
     def upload_picture(self, file_path):
@@ -123,21 +123,21 @@ class PracticeFormPage(BasePage):
     def select_state(self, state):
         """Selects a state."""
         scrollIntoView(self.driver, *self.STATE_INPUT)
-        self.click(*self.STATE_INPUT)
+        self.click(self.STATE_INPUT)
         state = str(state[0])
         # select from dropdown
         if self.is_element_visible(self.DROPDOWN):
-            selectDropdownOption(self.driver, *self.DROPDOWN, state, *self.DROPDOWN_OPTIONS)
+            selectDropdownOption(self.driver, self.DROPDOWN, state, self.DROPDOWN_OPTIONS)
         else:
             logging.warning(f"Subjects Dropdown not found!")
 
     def select_city(self, city):
         """Selects a city."""
-        self.click(*self.STATE_INPUT)
+        self.click(self.CITY_INPUT)
         city = str(city[0])
         # select from dropdown
         if self.is_element_visible(self.DROPDOWN):
-            selectDropdownOption(self.driver, *self.DROPDOWN, city, *self.DROPDOWN_OPTIONS)
+            selectDropdownOption(self.driver, self.DROPDOWN, city, self.DROPDOWN_OPTIONS)
         else:
             logging.warning(f"Subjects Dropdown not found!")
 
@@ -149,7 +149,7 @@ class PracticeFormPage(BasePage):
         """Navigates to the Practice Form page."""
         # forms_card = self.driver.find_element(*self.FORMS_CARD)
         scrollIntoView(self.driver, *self.FORMS_CARD)
-        self.click(*self.FORMS_CARD)
+        self.click(self.FORMS_CARD)
         self.driver.find_element(*self.PRACTICE_FORM).click()
 
     def scroll_to_form_beginning(self):

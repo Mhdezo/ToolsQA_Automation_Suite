@@ -55,12 +55,12 @@ def openWebsite(driver,websiteUrl):
     driver.get(websiteUrl)
     driver.maximize_window()
 # Helper to select dropdown options
-def selectDropdownOption(driver, dropdownLocator, value, optionLocation):
+def selectDropdownOption(driver, dropdown_locator, value, option_location):
     try:
         dropdown = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located(dropdownLocator)
+            EC.presence_of_element_located(dropdown_locator)
         )
-        options = dropdown.find_elements(optionLocation)
+        options = dropdown.find_elements(*option_location)
         for option in options:
             if option.text.lower() == value.lower():
                 option.click()
@@ -69,10 +69,10 @@ def selectDropdownOption(driver, dropdownLocator, value, optionLocation):
     except TimeoutException:
         logging.error("Dropdown not found or not clickable.")
 # Read Excel data
-def readExcelData(sheetName,config):
+def readExcelData(sheet_name,config):
     excelFilePath = config.get("PATHS", "excelfile")
     workBook = openpyxl.load_workbook(excelFilePath)  # load the workBook
-    sheet = workBook[sheetName]  # Point to the desired sheet
+    sheet = workBook[sheet_name]  # Point to the desired sheet
     columnsNumber = sheet.max_column  # Get number of columns in the sheet those filled with the data
     rowsNumber = sheet.max_row  # Get number of Rows in the sheet those filled with the data
     dataFrame = {}  # Dictionary to store the data of the sheet
