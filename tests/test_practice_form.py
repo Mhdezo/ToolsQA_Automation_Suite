@@ -1,0 +1,49 @@
+# tests/test_practice_form.py
+import logging
+
+import pytest
+from pages.practice_form import PracticeFormPage
+from utils.common_methods import initialize_driver, read_config, configure_logging, readExcelData, By
+
+def test_practice_form():
+    global driver
+    try:
+        # Read config and initialize driver
+        config = read_config()
+        configure_logging(config)
+        driver = initialize_driver("chrome", config)
+
+        # Open the website
+        driver.get(config.get("URLS", "website"))
+
+        # Initialize the Practice Form page
+        practice_form_page = PracticeFormPage(driver)
+
+        # Navigate to the Practice Form
+        practice_form_page.navigate_to_practice_form()
+        # practice_form_page.scroll_to_form_beginning()
+
+        # Read data from Excel
+        data = readExcelData("Sheet1", config)
+
+        # Fill the form
+        practice_form_page.fill_first_name(data["firstName"])
+        practice_form_page.fill_last_name(data["lastName"])
+        practice_form_page.fill_email(data["userEmail"])
+        practice_form_page.select_gender(data["Gender"])
+        practice_form_page.fill_mobile_number(data["userNumber"])
+        practice_form_page.fill_date_of_birth(data["dateOfBirthInput"])
+        practice_form_page.fill_subjects(data["subjectsInput"])
+        practice_form_page.select_hobbies(data["hobbies"])
+        practice_form_page.upload_picture(str(config.get("PATHS", "uploadfile")) + str(data["uploadPicture"][0]))
+        practice_form_page.fill_current_address(data["currentAddress"])
+        practice_form_page.select_state(data["state"])
+        practice_form_page.select_city(data["city"])
+        practice_form_page.submit_form()
+
+        # Add assertions to verify form submission
+        assert practice_form_page.is_element_visible((By.ID, "example-modal-sizes-title-lg")), "Form submission failed."
+
+    finally:
+        # Quit the browser
+        driver.quit()
