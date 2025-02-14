@@ -23,7 +23,7 @@ ToolsQA_Automation_Suite/
 
 1. Clone the Repository:
    ```sh
-   git clone https://github.com/your-username/ToolsQA_Automation_Suite.git
+   git clone https://github.com/Mhdezo/ToolsQA_Automation_Suite.git
    cd ToolsQA_Automation_Suite
    ```
 ## Install Dependencies:
