@@ -1,30 +1,22 @@
-# tests/test_practice_form.py
-import logging
-
+from logging_config import logging
 import pytest
-from pages.practice_form import PracticeFormPage
-from utils.common_methods import initialize_driver, read_config, configure_logging, readExcelData, By
+from pages.practice_form import PracticeFormPage, By
+from utils.common_methods import read_excel_data
 
-def test_practice_form():
-    global driver
+def test_practice_form(browser, config):
+    """Test to fill and submit the Practice Form."""
     try:
-        # Read config and initialize driver
-        config = read_config()
-        configure_logging(config)
-        driver = initialize_driver("chrome", config)
-
         # Open the website
-        driver.get(config.get("URLS", "website"))
+        browser.get(config.get("URLS", "website"))
 
         # Initialize the Practice Form page
-        practice_form_page = PracticeFormPage(driver)
+        practice_form_page = PracticeFormPage(browser)
 
         # Navigate to the Practice Form
         practice_form_page.navigate_to_practice_form()
-        # practice_form_page.scroll_to_form_beginning()
 
         # Read data from Excel
-        data = readExcelData("Sheet1", config)
+        data = read_excel_data("Sheet1", config)
 
         # Fill the form
         practice_form_page.fill_first_name(data["firstName"])
@@ -44,6 +36,6 @@ def test_practice_form():
         # Add assertions to verify form submission
         assert practice_form_page.is_element_visible((By.ID, "example-modal-sizes-title-lg")), "Form submission failed."
 
-    finally:
-        # Quit the browser
-        driver.quit()
+    except Exception as e:
+        logging.error(f"Test failed with error: {e}")
+        raise
