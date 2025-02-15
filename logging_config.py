@@ -13,7 +13,7 @@ logging.basicConfig(
     datefmt='%Y-%m-%d %H:%M:%S'   # Date format
 )
 
-# Optional: Add a console handler to print logs to the console
+# Add a console handler to print logs to the console
 console_handler = logging.StreamHandler()
 console_handler.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')

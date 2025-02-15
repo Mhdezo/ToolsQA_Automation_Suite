@@ -1,6 +1,5 @@
 # pytest fixture
 import pytest
-from selenium import webdriver
 from utils.common_methods import initialize_driver, read_config
 
 @pytest.fixture(scope="module")

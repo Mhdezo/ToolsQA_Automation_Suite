@@ -31,13 +31,6 @@ class BasePage:
         try:
             WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(locator))
             return True
-        except:
-            return False
-
-    def wait_for_element(self, locator, timeout=10):
-        """Waits for an element to be visible."""
-        try:
-            return WebDriverWait(self.driver, timeout).until(EC.visibility_of_element_located(locator))
         except Exception as e:
-            logging.error(f"Element not found: {e}")
-            raise
+            logging.error(f"Failed of element visibility: {e}")
+            return False

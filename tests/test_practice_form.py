@@ -1,5 +1,4 @@
 from logging_config import logging
-import pytest
 from pages.practice_form import PracticeFormPage, By
 from utils.common_methods import read_excel_data
 

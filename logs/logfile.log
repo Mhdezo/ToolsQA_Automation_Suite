@@ -43,3 +43,18 @@
 2025-02-14 23:58:28 - INFO - State : "Haryana"
 2025-02-14 23:58:28 - INFO - City : "Karnal"
 2025-02-14 23:58:28 - INFO - Form Submitted
+2025-02-15 04:33:36 - INFO - First Name : "['John']"
+2025-02-15 04:33:36 - INFO - Last Name : "['Wick']"
+2025-02-15 04:33:36 - INFO - User Email : "['JohnWick@gmail.com']"
+2025-02-15 04:33:36 - INFO - Gender : "['Male']"
+2025-02-15 04:33:37 - INFO - User number : "['0096212345']"
+2025-02-15 04:33:39 - INFO - Date of Birth : "09 March 2024"
+2025-02-15 04:33:40 - INFO - Subject : "English"
+2025-02-15 04:33:40 - INFO - Subject : "Maths"
+2025-02-15 04:33:40 - INFO - Hobby : "music"
+2025-02-15 04:33:41 - INFO - Hobby : "sports"
+2025-02-15 04:33:41 - INFO - Picture uploaded
+2025-02-15 04:33:41 - INFO - Address : "['NY, USA']"
+2025-02-15 04:33:41 - INFO - State : "Haryana"
+2025-02-15 04:33:42 - INFO - City : "Karnal"
+2025-02-15 04:33:42 - INFO - Form Submitted

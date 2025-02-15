@@ -91,87 +91,119 @@ class PracticeFormPage(BasePage):
 
     def navigate_to_month_year(self, target_month_year):
         """Navigates to the target month and year in the date picker."""
-        while self.get_current_month_year() != target_month_year:
-            if target_month_year[-4:] > self.get_current_month_year()[-4:]:
-                self.click(self.RIGHT_ARROW)
-            else:
-                self.click(self.LEFT_ARROW)
+        try:
+            while self.get_current_month_year() != target_month_year:
+                if target_month_year[-4:] > self.get_current_month_year()[-4:]:
+                    self.click(self.RIGHT_ARROW)
+                else:
+                    self.click(self.LEFT_ARROW)
+        except Exception as e:
+            logging.error(f'Navigate to month and year Failed: "{e}"')
+            raise
 
     def get_current_month_year(self):
         """Returns the current month and year displayed in the date picker."""
-        return self.driver.find_element(*self.CURRENT_MONTH_YEAR).text
+        try:
+            return self.driver.find_element(*self.CURRENT_MONTH_YEAR).text
+        except Exception as e:
+            logging.error(f'Get current month and year Failed: "{e}"')
+            raise
 
     def select_day(self, day, month):
         """Selects the day in the date picker."""
-        days = self.driver.find_elements(*self.DAYS)
-        for day_element in days:
-            if day in day_element.get_attribute('aria-label') and month in day_element.get_attribute('aria-label'):
-                day_element.click()
-                return
+        try:
+            days = self.driver.find_elements(*self.DAYS)
+            for day_element in days:
+                if day in day_element.get_attribute('aria-label') and month in day_element.get_attribute('aria-label'):
+                    day_element.click()
+                    return
+        except Exception as e:
+            logging.error(f'Select day Failed: "{e}"')
+            raise
 
     def fill_subjects(self, subjects):
         """Fills the Subjects field."""
-        subjects = str(subjects[0]).split(',')
-        for subject in subjects:
-            self.type(self.SUBJECTS_INPUT, subject)
-            if self.is_element_visible(self.DROPDOWN):
-                select_dropdown_option(self.driver, self.DROPDOWN, subject, self.DROPDOWN_OPTIONS)
-                logging.info(f'Subject : "{subject}"')
-            else:
-                logging.warning(f"Subjects Dropdown not found!")
-
+        try:
+            subjects = str(subjects[0]).split(',')
+            for subject in subjects:
+                self.type(self.SUBJECTS_INPUT, subject)
+                if self.is_element_visible(self.DROPDOWN):
+                    select_dropdown_option(self.driver, self.DROPDOWN, subject, self.DROPDOWN_OPTIONS)
+                    logging.info(f'Subject : "{subject}"')
+                else:
+                    logging.warning(f"Subjects Dropdown not found!")
+        except Exception as e:
+            logging.error(f'Subjects Failed: "{e}"')
+            raise
     def select_hobbies(self, hobbies):
         """Selects hobbies."""
-        hobbies = str(hobbies[0]).split(',')
-        hobbies = [h.lower() for h in hobbies]
-        for hobby in hobbies:
-            hobby_locator = (By.XPATH, f'//label[text()="{hobby.capitalize()}"]')
-            self.click(hobby_locator)
-            logging.info(f'Hobby : "{hobby}"')
-
+        try:
+            hobbies = str(hobbies[0]).split(',')
+            hobbies = [h.lower() for h in hobbies]
+            for hobby in hobbies:
+                hobby_locator = (By.XPATH, f'//label[text()="{hobby.capitalize()}"]')
+                self.click(hobby_locator)
+                logging.info(f'Hobby : "{hobby}"')
+        except Exception as e:
+            logging.error(f'Hobbies Failed: "{e}"')
+            raise
     def upload_picture(self, file_path):
         """Uploads a picture."""
-        self.driver.find_element(*self.UPLOAD_PICTURE).send_keys(file_path)
-        logging.info(f'Picture uploaded')
-
+        try:
+            self.driver.find_element(*self.UPLOAD_PICTURE).send_keys(file_path)
+            logging.info(f'Picture uploaded')
+        except Exception as e:
+            logging.error(f'Upload picture Failed: "{e}"')
+            raise
     def fill_current_address(self, address):
         """Fills the Current Address field."""
-        self.type(self.CURRENT_ADDRESS, address)
-        logging.info(f'Address : "{address}"')
-
+        try:
+            self.type(self.CURRENT_ADDRESS, address)
+            logging.info(f'Address : "{address}"')
+        except Exception as e:
+            logging.error(f'Fill address Failed: "{e}"')
+            raise
     def select_state(self, state):
         """Selects a state."""
-        scroll_into_view(self.driver, *self.STATE_INPUT)
-        self.click(self.STATE_INPUT)
-        state = str(state[0])
-        if self.is_element_visible(self.DROPDOWN):
-            select_dropdown_option(self.driver, self.DROPDOWN, state, self.DROPDOWN_OPTIONS)
-            logging.info(f'State : "{state}"')
-        else:
-            logging.warning(f"State Dropdown not found!")
-
+        try:
+            scroll_into_view(self.driver, *self.STATE_INPUT)
+            self.click(self.STATE_INPUT)
+            state = str(state[0])
+            if self.is_element_visible(self.DROPDOWN):
+                select_dropdown_option(self.driver, self.DROPDOWN, state, self.DROPDOWN_OPTIONS)
+                logging.info(f'State : "{state}"')
+            else:
+                logging.warning(f"State Dropdown not found!")
+        except Exception as e:
+            logging.error(f'Select state Failed: "{e}"')
+            raise
     def select_city(self, city):
         """Selects a city."""
-        self.click(self.CITY_INPUT)
-        city = str(city[0])
-        if self.is_element_visible(self.DROPDOWN):
-            select_dropdown_option(self.driver, self.DROPDOWN, city, self.DROPDOWN_OPTIONS)
-            logging.info(f'City : "{city}"')
-        else:
-            logging.warning(f"City Dropdown not found!")
-
+        try:
+            self.click(self.CITY_INPUT)
+            city = str(city[0])
+            if self.is_element_visible(self.DROPDOWN):
+                select_dropdown_option(self.driver, self.DROPDOWN, city, self.DROPDOWN_OPTIONS)
+                logging.info(f'City : "{city}"')
+            else:
+                logging.warning(f"City Dropdown not found!")
+        except Exception as e:
+            logging.error(f'Select city Failed: "{e}"')
+            raise
     def submit_form(self):
         """Submits the form."""
-        self.click(self.SUBMIT_BUTTON)
-        logging.info(f'Form Submitted')
-
+        try:
+            self.click(self.SUBMIT_BUTTON)
+            logging.info(f'Form Submitted')
+        except Exception as e:
+            logging.error(f'Submit form Failed: "{e}"')
+            raise
     def navigate_to_practice_form(self):
         """Navigates to the Practice Form page."""
-        scroll_into_view(self.driver, *self.FORMS_CARD)
-        self.click(self.FORMS_CARD)
-        self.driver.find_element(*self.PRACTICE_FORM).click()
-
-    def scroll_to_form_beginning(self):
-        """Scrolls to the beginning of the form."""
-        beginning_of_form = self.driver.find_element(*self.BEGINNING_OF_FORM)
-        scroll_into_view(self.driver, beginning_of_form)
+        try:
+            scroll_into_view(self.driver, *self.FORMS_CARD)
+            self.click(self.FORMS_CARD)
+            self.driver.find_element(*self.PRACTICE_FORM).click()
+        except Exception as e:
+            logging.error(f'Navigate to practice form Failed: "{e}"')
+            raise
