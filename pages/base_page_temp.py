@@ -1,7 +1,7 @@
 # base class for all pages
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from logging_config import logging
+from ToolsQA_Automation_Suite.logging_config import logging
 from selenium.webdriver.common.alert import Alert
 
 class BasePage:
@@ -39,7 +39,7 @@ class BasePage:
     def is_alert_present(self):
         """Check if alert is visible"""
         try:
-            WebDriverWait(self.driver, 10).until(EC.alert_is_present())
+            WebDriverWait(self.driver,10).until(EC.alert_is_present())
             return True
         except Exception as e:
             logging.error(f"Failed of alert visibility: {e}")

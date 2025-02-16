@@ -51,25 +51,44 @@ def select_dropdown_option(driver, dropdown_locator, value, option_location):
     except TimeoutException:
         logging.error("Dropdown not found or not clickable.")
 
+# def read_excel_data(sheet_name, config):
+#     """Reads data from an Excel file."""
+#     try:
+#         excel_file_path = config.get("PATHS", "excelfile")
+#         work_book = openpyxl.load_workbook(excel_file_path)
+#         sheet = work_book[sheet_name]
+#         columns_number = sheet.max_column
+#         rows_number = sheet.max_row
+#         data_frame = {}
+#         for col in range(1, columns_number + 1):
+#             cell_value = []
+#             for row in range(2, rows_number + 1):
+#                 cell_value.append(sheet.cell(row, col).value)
+#             data_frame[sheet.cell(1, col).value] = cell_value
+#         return data_frame
+#     except FileNotFoundError:
+#         logging.error(f"Excel file not found: {excel_file_path}")
+#         return {}
 def read_excel_data(sheet_name, config):
-    """Reads data from an Excel file."""
+    """Reads test data from an Excel file and returns a list of row dictionaries."""
     try:
         excel_file_path = config.get("PATHS", "excelfile")
         work_book = openpyxl.load_workbook(excel_file_path)
         sheet = work_book[sheet_name]
-        columns_number = sheet.max_column
-        rows_number = sheet.max_row
-        data_frame = {}
-        for col in range(1, columns_number + 1):
-            cell_value = []
-            for row in range(2, rows_number + 1):
-                cell_value.append(sheet.cell(row, col).value)
-            data_frame[sheet.cell(1, col).value] = cell_value
-        return data_frame
+
+        columns = [sheet.cell(1, col).value for col in range(1, sheet.max_column + 1)]
+        test_data = []
+
+        for row in range(2, sheet.max_row + 1):
+            row_data = {columns[col - 1]: sheet.cell(row, col).value for col in range(1, sheet.max_column + 1)}
+            if any(row_data.values()):  # Ensure the row has at least one non-empty value
+                test_data.append(row_data)
+
+        return test_data
+
     except FileNotFoundError:
         logging.error(f"Excel file not found: {excel_file_path}")
-        return {}
-
+        return []
 def quit_browser(driver):
     """Closes the browser."""
     driver.quit()

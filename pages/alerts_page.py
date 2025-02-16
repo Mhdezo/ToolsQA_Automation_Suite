@@ -1,8 +1,8 @@
 # page class for the Practice Form
 from selenium.webdriver.common.by import By
-from ToolsQA_Automation_Suite.logging_config import logging
-from ToolsQA_Automation_Suite.utils.common_methods import scroll_into_view, select_dropdown_option
-from ToolsQA_Automation_Suite.pages.base_page import BasePage
+from logging_config import logging
+from utils.common_methods import scroll_into_view
+from pages.base_page import BasePage
 
 class AlertPage(BasePage):
     # Locators

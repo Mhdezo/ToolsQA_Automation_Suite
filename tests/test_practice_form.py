@@ -1,9 +1,21 @@
+import pytest
 from logging_config import logging
 from pages.practice_form import PracticeFormPage, By
-from utils.common_methods import read_excel_data
+from utils.common_methods import read_excel_data, read_config
 
-def test_practice_form(browser, config):
-    """Test to fill and submit the Practice Form."""
+# Load config using the existing method from common_methods.py
+config = read_config()
+
+# Define a function to get test data dynamically
+def get_test_data():
+    """Reads test data from Excel and returns a list of row dictionaries."""
+    return read_excel_data("Sheet1", config)
+
+
+@pytest.mark.parametrize("data", get_test_data())
+def test_practice_form(browser, data):
+    """Test to fill and submit the Practice Form with multiple data sets."""
+
     try:
         # Open the website
         browser.get(config.get("URLS", "website"))
@@ -14,10 +26,7 @@ def test_practice_form(browser, config):
         # Navigate to the Practice Form
         practice_form_page.navigate_to_practice_form()
 
-        # Read data from Excel
-        data = read_excel_data("Sheet1", config)
-
-        # Fill the form
+        # Fill the form using data from Excel
         practice_form_page.fill_first_name(data["firstName"])
         practice_form_page.fill_last_name(data["lastName"])
         practice_form_page.fill_email(data["userEmail"])
@@ -26,14 +35,19 @@ def test_practice_form(browser, config):
         practice_form_page.fill_date_of_birth(data["dateOfBirthInput"])
         practice_form_page.fill_subjects(data["subjectsInput"])
         practice_form_page.select_hobbies(data["hobbies"])
-        practice_form_page.upload_picture(str(config.get("PATHS", "uploadfile")) + str(data["uploadPicture"][0]))
+        practice_form_page.upload_picture(str(config.get("PATHS", "uploadfile")) + str(data["uploadPicture"]))
         practice_form_page.fill_current_address(data["currentAddress"])
         practice_form_page.select_state(data["state"])
         practice_form_page.select_city(data["city"])
         practice_form_page.submit_form()
 
-        # Add assertions to verify form submission
-        assert practice_form_page.is_element_visible((By.ID, "example-modal-sizes-title-lg")), "Form submission failed."
+        # Check expected result
+        if data.get("Expected_Result") == "Pass":
+            assert practice_form_page.is_element_visible(
+                (By.ID, "example-modal-sizes-title-lg")), "Form submission failed."
+        else:
+            assert not practice_form_page.is_element_visible(
+                (By.ID, "example-modal-sizes-title-lg")), "Form should have failed but passed."
 
     except Exception as e:
         logging.error(f"Test failed with error: {e}")

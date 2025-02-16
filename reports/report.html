@@ -243,10 +243,10 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
 }
 </script>
     <h1>report.html</h1>
-    <p>Report generated on 15-Feb-2025 at 04:33:44 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
+    <p>Report generated on 16-Feb-2025 at 01:46:46 by <a href="https://pypi.python.org/pypi/pytest-html">pytest-html</a> v3.1.1</p>
     <h2>Summary</h2>
-    <p>1 tests ran in 17.83 seconds. </p>
-    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">1 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">0 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
+    <p>3 tests ran in 20.09 seconds. </p>
+    <p class="filter" hidden="true">(Un)check the boxes to filter the results.</p><input checked="true" class="filter" data-test-result="passed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="passed">2 passed</span>, <input checked="true" class="filter" data-test-result="skipped" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="skipped">0 skipped</span>, <input checked="true" class="filter" data-test-result="failed" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="failed">1 failed</span>, <input checked="true" class="filter" data-test-result="error" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="error">0 errors</span>, <input checked="true" class="filter" data-test-result="xfailed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xfailed">0 expected failures</span>, <input checked="true" class="filter" data-test-result="xpassed" disabled="true" hidden="true" name="filter_checkbox" onChange="filterTable(this)" type="checkbox"/><span class="xpassed">0 unexpected passes</span>
     <h2>Results</h2>
     <table id="results-table">
       <thead id="results-table-head">
@@ -257,41 +257,91 @@ function filterTable(elem) { // eslint-disable-line no-unused-vars
           <th class="sortable links" col="links">Links</th></tr>
         <tr hidden="true" id="not-found-message">
           <th colspan="4">No results found. Try to check the filters</th></tr></thead>
-      <tbody class="passed results-table-row">
+      <tbody class="failed results-table-row">
         <tr>
-          <td class="col-result">Passed</td>
-          <td class="col-name">tests/test_practice_form.py::test_practice_form</td>
-          <td class="col-duration">17.78</td>
+          <td class="col-result">Failed</td>
+          <td class="col-name">tests/test_practice_form_v2.py::test_practice_form[data2]</td>
+          <td class="col-duration">4.66</td>
           <td class="col-links"></td></tr>
         <tr>
           <td class="extra" colspan="4">
-            <div class="log"> ------------------------------Captured stderr call------------------------------ <br/>2025-02-15 04:33:36,030 - INFO - First Name : &quot;[&#x27;John&#x27;]&quot;
-2025-02-15 04:33:36,359 - INFO - Last Name : &quot;[&#x27;Wick&#x27;]&quot;
-2025-02-15 04:33:36,570 - INFO - User Email : &quot;[&#x27;JohnWick@gmail.com&#x27;]&quot;
-2025-02-15 04:33:36,808 - INFO - Gender : &quot;[&#x27;Male&#x27;]&quot;
-2025-02-15 04:33:37,011 - INFO - User number : &quot;[&#x27;0096212345&#x27;]&quot;
-2025-02-15 04:33:39,887 - INFO - Date of Birth : &quot;09 March 2024&quot;
-2025-02-15 04:33:40,530 - INFO - Subject : &quot;English&quot;
-2025-02-15 04:33:40,797 - INFO - Subject : &quot;Maths&quot;
-2025-02-15 04:33:40,924 - INFO - Hobby : &quot;music&quot;
-2025-02-15 04:33:41,034 - INFO - Hobby : &quot;sports&quot;
-2025-02-15 04:33:41,074 - INFO - Picture uploaded
-2025-02-15 04:33:41,225 - INFO - Address : &quot;[&#x27;NY, USA&#x27;]&quot;
-2025-02-15 04:33:41,726 - INFO - State : &quot;Haryana&quot;
-2025-02-15 04:33:42,156 - INFO - City : &quot;Karnal&quot;
-2025-02-15 04:33:42,335 - INFO - Form Submitted
-<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     root:practice_form.py:36 First Name : &quot;[&#x27;John&#x27;]&quot;
-INFO     root:practice_form.py:41 Last Name : &quot;[&#x27;Wick&#x27;]&quot;
-INFO     root:practice_form.py:46 User Email : &quot;[&#x27;JohnWick@gmail.com&#x27;]&quot;
-INFO     root:practice_form.py:52 Gender : &quot;[&#x27;Male&#x27;]&quot;
-INFO     root:practice_form.py:57 User number : &quot;[&#x27;0096212345&#x27;]&quot;
+            <div class="log">browser = &lt;selenium.webdriver.chrome.webdriver.WebDriver (session=&quot;88da3f202bfb878caa74096bc92cc191&quot;)&gt;<br/>data = {&#x27;Expected_Result&#x27;: &#x27;Fail&#x27;, &#x27;Gender&#x27;: &#x27;Male&#x27;, &#x27;city&#x27;: &#x27;Karnal&#x27;, &#x27;currentAddress&#x27;: &#x27;NY, USA&#x27;, ...}<br/><br/>    @pytest.mark.parametrize(&quot;data&quot;, get_test_data())<br/>    def test_practice_form(browser, data):<br/>        &quot;&quot;&quot;Test to fill and submit the Practice Form with multiple data sets.&quot;&quot;&quot;<br/>    <br/>        try:<br/>            # Open the website<br/>            browser.get(config.get(&quot;URLS&quot;, &quot;website&quot;))<br/>    <br/>            # Initialize the Practice Form page<br/>            practice_form_page = PracticeFormPage(browser)<br/>    <br/>            # Navigate to the Practice Form<br/>            practice_form_page.navigate_to_practice_form()<br/>    <br/>            # Fill the form using data from Excel<br/>&gt;           practice_form_page.fill_first_name(data[&quot;firstName&quot;])<br/><br/>tests\test_practice_form_v2.py:31: <br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/>pages\practice_form.py:35: in fill_first_name<br/>    self.type(self.FIRST_NAME, first_name)<br/>pages\base_page.py:24: in type<br/>    element.send_keys(text)<br/>..\..\AppData\Local\Programs\Python\Python313\Lib\site-packages\selenium\webdriver\remote\webelement.py:540: in send_keys<br/>    {&#x27;text&#x27;: &quot;&quot;.join(keys_to_typing(value)),<br/>_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _<br/><br/>value = (None,)<br/><br/>    def keys_to_typing(value: Iterable[AnyKey]) -&gt; List[str]:<br/>        &quot;&quot;&quot;Processes the values that will be typed in the element.&quot;&quot;&quot;<br/>        typing: List[str] = []<br/>        for val in value:<br/>            if isinstance(val, Keys):<br/>                typing.append(val)<br/>            elif isinstance(val, int) or isinstance(val, float):<br/>                val = str(val)<br/>                for i in range(len(val)):<br/>                    typing.append(val[i])<br/>            else:<br/>&gt;               for i in range(len(val)):<br/><span class="error">E               TypeError: object of type &#x27;NoneType&#x27; has no len()</span><br/><br/>..\..\AppData\Local\Programs\Python\Python313\Lib\site-packages\selenium\webdriver\common\utils.py:151: TypeError<br/> ------------------------------Captured stderr call------------------------------ <br/>2025-02-16 01:46:44,142 - ERROR - Failed to type text: object of type &#x27;NoneType&#x27; has no len()
+2025-02-16 01:46:44,143 - ERROR - Test failed with error: object of type &#x27;NoneType&#x27; has no len()
+<br/> -------------------------------Captured log call-------------------------------- <br/>ERROR    root:base_page.py:26 Failed to type text: object of type &#x27;NoneType&#x27; has no len()
+ERROR    root:test_practice_form_v2.py:54 Test failed with error: object of type &#x27;NoneType&#x27; has no len()<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">tests/test_practice_form_v2.py::test_practice_form[data0]</td>
+          <td class="col-duration">10.25</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stderr call------------------------------ <br/>2025-02-16 01:46:34,190 - INFO - First Name : &quot;John&quot;
+2025-02-16 01:46:34,256 - INFO - Last Name : &quot;Wick&quot;
+2025-02-16 01:46:34,323 - INFO - User Email : &quot;JohnWick@gmail.com&quot;
+2025-02-16 01:46:34,378 - INFO - Gender : &quot;Male&quot;
+2025-02-16 01:46:34,442 - INFO - User number : &quot;0096212345&quot;
+2025-02-16 01:46:35,942 - INFO - Date of Birth : &quot;09 March 2024&quot;
+2025-02-16 01:46:36,081 - INFO - Subject : &quot;English&quot;
+2025-02-16 01:46:36,253 - INFO - Subject : &quot;Maths&quot;
+2025-02-16 01:46:36,323 - INFO - Hobby : &quot;music&quot;
+2025-02-16 01:46:36,384 - INFO - Hobby : &quot;sports&quot;
+2025-02-16 01:46:36,418 - INFO - Picture uploaded
+2025-02-16 01:46:36,485 - INFO - Address : &quot;NY, USA&quot;
+2025-02-16 01:46:36,635 - INFO - State : &quot;Haryana&quot;
+2025-02-16 01:46:36,743 - INFO - City : &quot;Karnal&quot;
+2025-02-16 01:46:36,804 - INFO - Form Submitted
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     root:practice_form.py:36 First Name : &quot;John&quot;
+INFO     root:practice_form.py:41 Last Name : &quot;Wick&quot;
+INFO     root:practice_form.py:46 User Email : &quot;JohnWick@gmail.com&quot;
+INFO     root:practice_form.py:52 Gender : &quot;Male&quot;
+INFO     root:practice_form.py:57 User number : &quot;0096212345&quot;
 INFO     root:practice_form.py:87 Date of Birth : &quot;09 March 2024&quot;
 INFO     root:practice_form.py:132 Subject : &quot;English&quot;
 INFO     root:practice_form.py:132 Subject : &quot;Maths&quot;
 INFO     root:practice_form.py:146 Hobby : &quot;music&quot;
 INFO     root:practice_form.py:146 Hobby : &quot;sports&quot;
 INFO     root:practice_form.py:154 Picture uploaded
-INFO     root:practice_form.py:162 Address : &quot;[&#x27;NY, USA&#x27;]&quot;
+INFO     root:practice_form.py:162 Address : &quot;NY, USA&quot;
+INFO     root:practice_form.py:174 State : &quot;Haryana&quot;
+INFO     root:practice_form.py:187 City : &quot;Karnal&quot;
+INFO     root:practice_form.py:197 Form Submitted<br/></div></td></tr></tbody>
+      <tbody class="passed results-table-row">
+        <tr>
+          <td class="col-result">Passed</td>
+          <td class="col-name">tests/test_practice_form_v2.py::test_practice_form[data1]</td>
+          <td class="col-duration">4.87</td>
+          <td class="col-links"></td></tr>
+        <tr>
+          <td class="extra" colspan="4">
+            <div class="log"> ------------------------------Captured stderr call------------------------------ <br/>2025-02-16 01:46:38,072 - INFO - First Name : &quot;Mohammad&quot;
+2025-02-16 01:46:38,199 - INFO - Last Name : &quot;Fast&quot;
+2025-02-16 01:46:38,364 - INFO - User Email : &quot;MohdFast@gmail.com&quot;
+2025-02-16 01:46:38,494 - INFO - Gender : &quot;Female&quot;
+2025-02-16 01:46:38,596 - INFO - User number : &quot;9587544555&quot;
+2025-02-16 01:46:40,044 - INFO - Date of Birth : &quot;10 March 2024&quot;
+2025-02-16 01:46:40,263 - INFO - Subject : &quot;English&quot;
+2025-02-16 01:46:40,393 - INFO - Subject : &quot;Maths&quot;
+2025-02-16 01:46:40,462 - INFO - Hobby : &quot;music&quot;
+2025-02-16 01:46:40,712 - INFO - Hobby : &quot;sports&quot;
+2025-02-16 01:46:40,731 - INFO - Picture uploaded
+2025-02-16 01:46:40,804 - INFO - Address : &quot;NY, USA&quot;
+2025-02-16 01:46:40,968 - INFO - State : &quot;Haryana&quot;
+2025-02-16 01:46:41,097 - INFO - City : &quot;Karnal&quot;
+2025-02-16 01:46:41,169 - INFO - Form Submitted
+<br/> -------------------------------Captured log call-------------------------------- <br/>INFO     root:practice_form.py:36 First Name : &quot;Mohammad&quot;
+INFO     root:practice_form.py:41 Last Name : &quot;Fast&quot;
+INFO     root:practice_form.py:46 User Email : &quot;MohdFast@gmail.com&quot;
+INFO     root:practice_form.py:52 Gender : &quot;Female&quot;
+INFO     root:practice_form.py:57 User number : &quot;9587544555&quot;
+INFO     root:practice_form.py:87 Date of Birth : &quot;10 March 2024&quot;
+INFO     root:practice_form.py:132 Subject : &quot;English&quot;
+INFO     root:practice_form.py:132 Subject : &quot;Maths&quot;
+INFO     root:practice_form.py:146 Hobby : &quot;music&quot;
+INFO     root:practice_form.py:146 Hobby : &quot;sports&quot;
+INFO     root:practice_form.py:154 Picture uploaded
+INFO     root:practice_form.py:162 Address : &quot;NY, USA&quot;
 INFO     root:practice_form.py:174 State : &quot;Haryana&quot;
 INFO     root:practice_form.py:187 City : &quot;Karnal&quot;
 INFO     root:practice_form.py:197 Form Submitted<br/></div></td></tr></tbody></table></body></html>
